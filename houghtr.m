@@ -1,27 +1,19 @@
 function [H,theta,rho]=hought(bw)
     [m,n,c]=size(bw);
     D = sqrt((m-1)^2 + (n-1)^2);
-    
     theta=-90:1:89;
     rhoResolution=1;
-    % nrho=2*(ceil(D/rhoResolution));
     diagonal=rhoResolution*ceil(D/rhoResolution);
     rho=-diagonal:rhoResolution:diagonal;
     nrho=length(rho);
     ntheta=length(theta);
     H=zeros(nrho,ntheta);
-    
     for k=1:m
         for l=1:n
             if (bw(k,l)==1)
                 for i=1:ntheta
-                    r=k*cos(deg2rad(theta(i)))+l*sin(deg2rad(theta(i)));
-                    b=D;
-                    r=r+b;
-                    r=r/(D*2);
-                    r=r*m-1;
-                    r=r+0.5;
-                    j=floor(r);
+                    r=l*cos(deg2rad(theta(i)))+k*sin(deg2rad(theta(i)));
+                    j=round(r)+diagonal+1;
                     H(j,i)=H(j,i)+1;
                 end
             end
