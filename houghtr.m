@@ -1,6 +1,6 @@
 function [H,theta,rho]=houghtr(bw)
     [m,n,c]=size(bw);
-    D = sqrt((m-1)^2 + (n-1)^2);
+    D = sqrt((m)^2 + (n)^2);
     theta=-90:1:89;
     rhoResolution=1;
     diagonal=rhoResolution*ceil(D/rhoResolution);
@@ -21,9 +21,18 @@ function [H,theta,rho]=houghtr(bw)
     end
 end
 
-% img=imread("img\road2.png");
+% img=imread("img\road_4.jpg");
 % i=im2gray(img);
-% bw=imbinarize(i,0.5);
+% bw=imgaussfilt(i);
+% bw=imbinarize(bw,0.5);
+% [m,n,c]=size(bw);
+% roi_vertices = [ ...
+%     n*0.00001, m;
+%     n*0.00001, m*0.5;
+%     n*0.99999, m*0.5;
+%     n*0.99999, m];
+% mask=poly2mask(roi_vertices(:,1), roi_vertices(:,2), m, n);
+% bw = bw & mask;
 % 
 % [h,theta,rho]=hought(bw);
 % 
